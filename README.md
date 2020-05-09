@@ -5,5 +5,5 @@
    packages: pandas, plotly
 2. [Pokedex Scraper](https://github.com/jennifer-wong/Portfolio/blob/master/Pokedex%20Scraper/pokedex_scraper.py)\
    Web scraper that extracts Pokemon information and stats from the Pokedex site\
-   Visualization and analysis of Pokemons
+   Visualization and analysis of Pokemons\
    packages: scrapy, pandas, matplotlib, seaborn, plotly
