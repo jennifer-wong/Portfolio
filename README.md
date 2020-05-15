@@ -7,5 +7,5 @@
    *note: to see the interactive plot, go to Kernel -> Restart & Run All*\
    Web scraper that extracts Pokemon information and stats from the Pokedex site\
    Visualization and analysis of Pokemons\
-   packages: scrapy, pandas, matplotlib, seaborn, plotly
+   packages: scrapy, pandas, matplotlib, seaborn, plotly, ipywidgets
    
