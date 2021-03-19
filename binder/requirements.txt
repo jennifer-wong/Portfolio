@@ -4,5 +4,5 @@ matplotlib==3.*
 seaborn==0.8.1
 plotly==4.6.0
 ipywidgets==7.5.1
-pillow==6.2.0
+pillow==8.1.1
 jupyter_contrib_nbextensions
