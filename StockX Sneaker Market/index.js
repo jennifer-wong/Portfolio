@@ -1,13 +1,23 @@
 var timer = null;
+var pad_num = number => number <= 9 ? `0${number}`.slice(-2) : number;
 
 async function load_data(file) {
 	const data = await d3.csv(file);
 	return data;
 }
 
+function preload_img(array) {
+	var list = [];
+
+	for (var i = 0; i < array.length; i++) {
+		var img = new Image();
+		list.push(img);
+		img.src = array[i];
+	}
+}
+
 function rotate_img(sneaker) {
 	var i = 1;
-	var pad_num = number => number <= 9 ? `0${number}`.slice(-2) : number;
 
 	timer = setInterval(function() {
 		i += 1;
@@ -23,6 +33,15 @@ function rotate_img(sneaker) {
 
 async function draw_chart(file) {
 	const data = await load_data(file);
+	
+	//cache images
+	img = ['images/default.jpg'];
+	for (var i = 0; i < data.length; i++) {
+		for (var j = 1; j < 37; j++) {
+			img.push('images/' + data[i]['Sneaker Name'] + '_' + pad_num(j) + '.jpg');
+		}
+	}
+	preload_img(img);
 
 	var margin = {top: 75, right: 150, bottom: 50, left: 60};
 	var width = 750 - margin.left - margin.right;
