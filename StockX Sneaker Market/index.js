@@ -35,7 +35,7 @@ async function draw_chart(file) {
 	const data = await load_data(file);
 	
 	//cache images
-	img = ['images/default.jpg'];
+	img = [];
 	for (var i = 0; i < data.length; i++) {
 		for (var j = 1; j < 37; j++) {
 			img.push('images/' + data[i]['Sneaker Name'] + '_' + pad_num(j) + '.jpg');
@@ -110,44 +110,38 @@ async function draw_chart(file) {
 		.domain(['Off-White', 'Yeezy']).
 		range(['#05ebfc', '#fc05e7']);
 
-	// tooltip
-	var tooltip = d3.select('div')
-		.append('div')
-			.style('opacity', 0)
+	var tooltip;
+
+	// tooltip functions
+	var show_tooltip = function(event, d) {
+		console.log('show');
+		tooltip = d3.select('div')
+			.append('div')
+			.style('opacity', 1)
 			.attr('class', 'tooltip')
 			.style('background-color', 'white')
 			.style('border-radius', '4px')
 			.style('color', 'black')
-			.style('width', '420px');
-	var tooltip_title = tooltip.append('div')
-		.attr('class', 'tooltip_title');
-	var tooltip_info = tooltip.append('div')
-		.attr('class', 'tooltip_info');
-	var tooltip_image = tooltip_info.append('img')
-		.attr('class', 'tooltip_image')
-		.attr('type', 'image/jpeg')
-		.attr('src', 'images/default.jpg');
-	var tooltip_details = tooltip_info.append('div')
-		.attr('class', 'tooltip_details');
-
-	// tooltip functions
-	var show_tooltip = function(event, d) {
-		tooltip_title
+			.style('width', '420px')
+			.style('left', ((d3.pointer(event)[0] - 25) + 'px'))
+			.style('top', ((d3.pointer(event)[1] + 100) + 'px'));
+		var tooltip_title = tooltip.append('div')
+			.attr('class', 'tooltip_title')
 			.html(d['Sneaker']);
-		tooltip_image
+		var tooltip_info = tooltip.append('div')
+			.attr('class', 'tooltip_info');
+		tooltip_image = tooltip_info.append('img')
+			.attr('class', 'tooltip_image')
+			.attr('type', 'image/jpeg')
 			.attr('src', 'images/' + d['Sneaker Name'] + '_01.jpg');
-		tooltip_details
+		var tooltip_details = tooltip_info.append('div')
+			.attr('class', 'tooltip_details')
 			.html('<text> retail price: $' + d['Retail Price'] + '</text><br>'
 				+ '<text> avg sale price: $' + d['Avg Sale Price'] + '</text><br>'
 				+ '<text> avg price premium: ' + d['Avg Price Premium'] + '%</text><br>'
 				+ '<text> sales: ' + d['Sales'] + '</text>');
-		tooltip
-			.style('opacity', 1)
-			.style('left', ((d3.pointer(event)[0] - 25) + 'px'))
-			.style('top', ((d3.pointer(event)[1] + 100) + 'px'));
-		tooltip
-			.transition()
-			.duration(50);
+		tooltip.transition()
+			.duration(1000);
 
 		rotate_img(d['Sneaker Name']);
 	}
@@ -156,16 +150,18 @@ async function draw_chart(file) {
 		tooltip
 			.style('left', ((d3.pointer(event)[0] - 25) + 'px'))
 			.style('top', ((d3.pointer(event)[1] + 100) + 'px'));
+		console.log('move');
 	}
 
 	var hide_tooltip = function(event, d) {
 		tooltip
 			.transition()
-			.duration(50)
+			.duration(1000)
 			.style('opacity', 0);
-		tooltip_image
-			.attr('src', 'images/default.jpg');
+
 		clearInterval(timer);
+		tooltip.remove();
+		console.log('hide');
 	}
 
 	// dots
