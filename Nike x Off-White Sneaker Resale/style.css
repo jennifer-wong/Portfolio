@@ -1,0 +1,78 @@
+html {
+	height: 100%;
+}
+
+body {
+	background-color: #040406; 
+	height: 100%;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#chart {
+	display: inline-block;
+	position: relative;
+}
+
+.axisLabel {
+	font-family: 'Monaco', monospace;
+	font-size: .85em;
+	fill: white;
+}
+
+.axis {
+	font-family: 'Monaco', monospace;
+	font-size: .85em;
+	color: white;
+}
+
+.bubbles {
+	stroke-width: 1px;
+	stroke: #040406;
+	opacity: .8;
+}
+
+.Off-White:hover {
+	stroke: #FAF9F6;
+}
+
+.tooltip {
+	position: absolute;
+}
+
+.tooltip_title {
+	display: table;
+	font-family: 'Monaco', monospace;
+	font-size: .95em;
+	padding-left: .4em;
+	padding-top: .2em;
+	padding-right: .4em;
+}
+
+.tooltip_info {
+	display: flex;
+	margin-bottom: .2em;
+	margin-left: .2em;
+}
+
+.tooltip_image {
+	float: left;
+	height: 130px;
+	width: 195px;
+	background-color: black;
+}
+
+.tooltip_details {
+	font-family: 'Monaco', monospace;
+	font-size: .85em;
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+	justify-content: space-around;
+	padding-right: .7em;
+	padding-left: .7em;
+	padding-top: 1.3em;
+	padding-bottom: 1.3em;
+}
